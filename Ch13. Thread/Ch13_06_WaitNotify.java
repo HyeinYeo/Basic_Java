@@ -25,6 +25,41 @@
  *  		- 대기 중인 스레드 전체 다 깨움
  * */
 
+class MyLabel{
+	private int barSize = 0; // 현재 그려져야 할 바의 크기
+	private int maxBarSize; // 바의 최대 크기
+	
+	public MyLabel(int maxbarSize) {
+		this.maxBarSize = maxbarSize;
+	}
+	
+	synchronized public void fill() {
+		if (barSize == maxBarSize) {
+			try {
+				wait(); // 바가 꽉 찬 경우 -> 비워질 때까지 대기
+			}
+			catch (InterrupedException e) {
+				return;
+			}
+		}
+		barSize++;
+		notify(); // 바가 빈 경우에 대기하던 스레드 1개 깨움
+	}
+	
+	synchronized public void consume() {
+		if (barSize == 0) {
+			try {
+				wait(); // 바가 빈 경우 -> 1개라도 찰 때까지 대기
+			}
+			catch(InterruptedException e) {
+				return;
+			}
+		}
+		barSize--;
+		notify(); // 바가 꽉 찬 경우에 대기하던 스레드 1개 깨움
+	}
+}
+
 public class Ch13_06_WaitNotify {
 
 	public static void main(String[] args) {

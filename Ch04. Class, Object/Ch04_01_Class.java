@@ -8,8 +8,9 @@
  * - 객체 생성
  * 		- Circle pizza = new Circle();
  * 		=> C++은 Circle pizza;만 해도 객체 생성되었지만,
- * 		   자바는 Circle pizza;만 하면 객체에 대한 레퍼런스 변수만 스택 영역에 선언됨(Circle 타입 크기의 메모리 할당)
- * 		   pizza = new Circle();해야지만 힙 영역에 드디어 객체가 생성됨(생성자 코드 실행)
+ * 		   자바는 Circle pizza;만 하면 객체에 대한 레퍼런스 변수만 스택 영역에 선언됨
+ * 		   pizza = new Circle();해야지만 힙 영역(Circle 타입 크기의 메모리 할당)에 드디어 객체가 생성됨(생성자 코드 실행)
+ * 		   생성완료 후, 객체의 주소를 레퍼런스 변수에 대입함
  */
 class Circle {
 		public int radius; // 멤버 변수

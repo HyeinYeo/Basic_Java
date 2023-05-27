@@ -9,6 +9,7 @@
  * 	  => 동일한 클래스의 모든 객체들이 공유
  * 
  * 	- main() 메소드 실행 전 생성
+ * 		=> 정적멤버변수는 초기화 안 되어 있으면, 자동으로 0으로 초기화 해줌
  * 	
  * 	- 객체와 클래스명, 두 가지로 접근 가능
  * 
@@ -16,7 +17,7 @@
  * 	  public static int a = 5; // 전역변수
  * 	  public static double sum(double x, double y); // 전역함수
  * 
- * 	- static 메소드는 static 변수만 사용 가능
+ * 	- static 메소드는 static 멤버(변수, 함수)만 사용 가능
  * 	  - non-static 메소드는 static 멤버든 아니든 모두 사용 가능
  * 	  why? non-static 멤버는 객체가 생성될 때 함께 생성되는 인스턴스 멤버이므로, 객체 없이도 존재하는 static 메소드가 사용 불가능 
  * 
@@ -25,10 +26,31 @@
  * 
  * */
 public class Ch04_09_Static {
-
+	class StaticClass {
+		// 정적멤버변수와 정적멤버함수(메소드)
+		static int m; // -> 0으로 자동 초기화됨!
+		static void func() {
+			System.out.println(m);
+		}
+		
+		// 전역변수, 전역함수처럼 사용 가능
+		public static double PI = 3.14;
+		public static int max(int a, int b) {
+			return (a > b)?a:b;
+		}
+		
+		// 인스턴스 멤버들. 객체 생성 전에는 사용 불가능, static 멤버들이 사용할 수 없음
+		int id;
+		void say() {
+			System.out.println("Hi");
+		}
+	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		// 객체 생성 전에도 사용 가능, 클래스 명으로 접근 가능
+		System.out.println(StaticClass.m);
+		StaticClass.func();
+		System.out.println(StaticClass.PI);
+		System.out.println(StaticClass.max(3, 6));
 	}
 
 }
